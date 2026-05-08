@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dualogues — Navigate out of AI chat chaos</title>
+  <meta name="description" content="Dualogues is a Chrome extension that adds visual navigation to long ChatGPT conversations. Jump to any message with one click.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=BioRhyme:wght@400;600;700;800&family=Calligraffitti&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-brand">
+        <img src="assets/dualogues-logo.png" alt="" class="nav-icon">
+        <span class="nav-wordmark">Dualogues</span>
+      </a>
+      <a href="https://chromewebstore.google.com/detail/dualogues/TODO" class="nav-cta" target="_blank" rel="noopener noreferrer">
+        Add to Chrome
+      </a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-icon-stack">
+        <div class="hero-icon-card hero-icon-card-back"></div>
+        <div class="hero-icon-card hero-icon-card-mid"></div>
+        <div class="hero-card" style="z-index:5">
+          <img src="assets/chatgpt-logo.png" alt="" class="hero-icon-img" style="width:63px;height:65px">
+        </div>
+        <div class="hero-card" style="z-index:4">
+          <img src="assets/gemini-logo.png" alt="" class="hero-icon-img" style="width:67px;height:69px">
+        </div>
+        <div class="hero-card" style="z-index:3">
+          <img src="assets/claude-logo.png" alt="" class="hero-icon-img" style="width:69px;height:72px">
+        </div>
+        <div class="hero-card" style="z-index:2">
+          <img src="assets/deepseek-logo.png" alt="" class="hero-icon-img" style="width:72px;height:74px">
+        </div>
+        <div class="hero-card" style="z-index:1">
+          <img src="assets/dualogues-logo.png" alt="" class="hero-icon-img" style="width:65px;height:67px">
+        </div>
+      </div>
+
+      <h1 class="hero-headline">
+        <span class="hero-line-1">
+          <span class="hero-underline-wrap"><span class="hero-underline-text">Navigate</span><span class="hero-underline hero-underline--green"></span></span> You
+        </span>
+        <span class="hero-line-2">Out of</span>
+        <span class="hero-line-3">
+          AI Chat <span class="hero-underline-wrap"><span class="hero-underline-text">Chaos</span><span class="hero-underline hero-underline--yellow"></span></span>
+        </span>
+      </h1>
+
+      <p class="hero-subtitle">More platforms coming soon</p>
+
+      <p class="hero-description">
+        If you're still <strong>scrolling the mouse</strong> furiously, just to find something in the long context<br>
+        Perhaps, Dualogues can help you, <strong>as a quiet assistant</strong>
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="https://chromewebstore.google.com/detail/dualogues/TODO" class="hero-cta-btn" target="_blank" rel="noopener noreferrer">
+          Add to Chrome
+          <svg class="hero-cta-arrow" viewBox="0 0 10 10" fill="none">
+            <path d="M0 5H9.33" stroke="currentColor" stroke-width="1.33" stroke-linecap="round"/>
+            <path d="M4.67 0.67L9.33 5L4.67 9.33" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <svg class="hero-chrome-icon" viewBox="0 0 40 40" fill="none">
+          <path clip-rule="evenodd" d="M19.97 0.474066C19.97 0.474066 31.4183 -0.0397447 37.4877 11.4675H18.9959C18.9959 11.4675 15.5062 11.3551 12.5251 15.5887C11.6687 17.3656 10.7481 19.1961 11.7811 22.8034C10.2932 20.2826 3.88126 9.11787 3.88126 9.11787C3.88126 9.11787 8.40387 0.929003 19.97 0.474066Z" fill="#EF3F36" fill-rule="evenodd"/>
+          <path clip-rule="evenodd" d="M36.8936 29.6864C36.8936 29.6864 31.611 39.8609 18.6158 39.3578C20.2215 36.58 27.8644 23.344 27.8644 23.344C27.8644 23.344 29.711 20.3789 27.5326 15.6796C26.4247 14.0472 25.2954 12.3399 21.6559 11.43C24.5835 11.4032 37.4556 11.43 37.4556 11.43C37.4556 11.43 42.2779 19.4422 36.8936 29.6864Z" fill="#FCD900" fill-rule="evenodd"/>
+          <path clip-rule="evenodd" d="M3.1266 29.7667C3.1266 29.7667 -3.04449 20.1059 3.89196 9.10182C5.49227 11.8796 13.1352 25.1156 13.1352 25.1156C13.1352 25.1156 14.7837 28.1985 19.9379 28.6588C21.9021 28.5143 23.9467 28.3912 26.5585 25.699C25.1188 28.2466 18.6587 39.3792 18.6587 39.3792C18.6587 39.3792 9.30304 39.5505 3.1266 29.7667Z" fill="#61BC5B" fill-rule="evenodd"/>
+          <path clip-rule="evenodd" d="M18.6105 39.4542L21.2117 28.5999C21.2117 28.5999 24.0697 28.3751 26.4675 25.7472C24.9796 28.3644 18.6105 39.4542 18.6105 39.4542Z" fill="#5AB055" fill-rule="evenodd"/>
+          <path clip-rule="evenodd" d="M11.2566 20.0845C11.2566 15.2997 15.1369 11.4193 19.9218 11.4193C24.7067 11.4193 28.587 15.2997 28.587 20.0845C28.587 24.8694 24.7067 28.7498 19.9218 28.7498C15.1369 28.7444 11.2566 24.8694 11.2566 20.0845Z" fill="white" fill-rule="evenodd"/>
+          <path clip-rule="evenodd" d="M12.707 20.0845C12.707 16.1025 15.9344 12.8698 19.9218 12.8698C23.9038 12.8698 27.1366 16.0971 27.1366 20.0845C27.1366 24.0666 23.9092 27.2993 19.9218 27.2993C15.9398 27.2993 12.707 24.0666 12.707 20.0845Z" fill="url(#chrome-gradient)" fill-rule="evenodd"/>
+          <path clip-rule="evenodd" d="M37.4502 11.4354L26.7404 14.5771C26.7404 14.5771 25.1241 12.2061 21.6505 11.4354C24.6638 11.4193 37.4502 11.4354 37.4502 11.4354Z" fill="#EACA05" fill-rule="evenodd"/>
+          <path clip-rule="evenodd" d="M11.5723 22.4074C10.0683 19.8008 3.88119 9.11785 3.88119 9.11785L11.8131 16.9642C11.8131 16.9642 10.9996 18.6394 11.3047 21.0372L11.5723 22.4074Z" fill="#DF3A32" fill-rule="evenodd"/>
+          <defs>
+            <linearGradient id="chrome-gradient" x1="12.9748" x2="12.9748" y1="12.9716" y2="26.8649" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#86BBE5"/>
+              <stop offset="1" stop-color="#1072BA"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <section id="features" class="section">
+    <div class="container">
+      <h2>How it works</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Track lines</h3>
+          <p>Compact markers on the right edge of the page show conversation structure and density at a glance.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Question panel</h3>
+          <p>Hover a track line to open the panel. Browse all your questions without leaving the current scroll position.</p>
+        </div>
+        <div class="feature-card">
+          <h3>One-click navigation</h3>
+          <p>Click any question to jump there. The page scrolls smoothly to the exact position.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Theme aware</h3>
+          <p>Follows ChatGPT light and dark mode automatically. No configuration needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="container">
+      <h2>FAQ</h2>
+
+      <div class="faq-grid">
+        <div class="faq-card">
+          <div class="faq-card-title"><span class="faq-q">Q</span><span>Nothing happens after installation</span></div>
+          <p>Make sure you are on a <code>chatgpt.com</code> page and have logged into ChatGPT. Dualogues only runs on the ChatGPT website.</p>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-card-title"><span class="faq-q">Q</span><span>Can't see the track lines</span></div>
+          <p>The page needs at least one message you sent. If the conversation just opened, wait a few seconds for it to load.</p>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-card-title"><span class="faq-q">Q</span><span>How do I delete stored data</span></div>
+          <p>Type <code>chrome://settings/content/all</code> in the address bar, find <code>chatgpt.com</code>, and click "Clear data". Or uninstall Dualogues — all extension data is removed automatically.</p>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-card-title"><span class="faq-q">Q</span><span>Does Dualogues read my conversation content</span></div>
+          <p>Dualogues reads message text locally in your browser to extract question summaries for the panel. No data is sent to any server.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy" class="section">
+    <div class="container">
+      <h2>Privacy</h2>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>100% local</h3>
+          <p>All processing happens in your browser. Message text is read locally to generate question summaries. Nothing is ever uploaded.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </div>
+          <h3>Delete anytime</h3>
+          <p>Uninstall the extension and all data is gone. No accounts, no cloud storage, no residual data left behind.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <h3>Minimal permissions</h3>
+          <p>Only requests access to chatgpt.com page content and local storage. No bookmarks, history, or tabs access.</p>
+        </div>
+      </div>
+      <footer class="footer">
+        <a href="mailto:support@dualogues.com">support@dualogues.com</a>
+        &nbsp;&middot;&nbsp;
+        &copy; 2026 Dualogues. All rights reserved.
+      </footer>
+    </div>
+  </section>
+
+  <script>
+  (function() {
+    var cards = document.querySelectorAll('.hero-card');
+    var n = cards.length;
+    var active = 0;
+
+    function markTop(idx) {
+      for (var i = 0; i < n; i++) {
+        var order = ((i - idx) % n + n) % n;
+        cards[i].style.zIndex = n - order;
+        cards[i].classList.toggle('is-top', order === 0);
+      }
+    }
+
+    markTop(active);
+    for (var i = 0; i < n; i++) {
+      if (i !== active) {
+        cards[i].style.transformOrigin = 'center top';
+        cards[i].style.transform = 'translateX(-50%) translateY(-14px) scale(0.82)';
+        cards[i].style.background = '#FBFAF8';
+      }
+    }
+
+    function flip() {
+      var cur = cards[active];
+      var nextIdx = (active + 1) % n;
+      var next = cards[nextIdx];
+
+      cur.style.transition = 'transform 0.8s cubic-bezier(0.55, 0, 1, 0.45)';
+      cur.style.transform = 'translateX(-50%) rotateX(-90deg) translateY(8px)';
+
+      next.style.transition = 'background 0.8s ease 0.2s';
+      next.style.background = '#FFFFFF';
+
+      setTimeout(function() {
+        active = nextIdx;
+        markTop(active);
+        cur.style.transition = 'none';
+        cur.style.transformOrigin = 'center top';
+        cur.style.transform = 'translateX(-50%) translateY(-14px) scale(0.82)';
+        cur.style.background = '#FBFAF8';
+        void cur.offsetHeight;
+      }, 850);
+
+      setTimeout(function() {
+        next.style.transition = 'transform 0.15s cubic-bezier(0.33, 0, 0.67, 1)';
+        next.style.transform = 'translateX(-50%) scale(0.82)';
+      }, 900);
+
+      setTimeout(function() {
+        next.style.transition = 'transform 0.25s cubic-bezier(0.25, 1, 0.5, 1)';
+        next.style.transform = 'translateX(-50%)';
+      }, 1100);
+
+      setTimeout(function() {
+        next.style.transition = 'none';
+        next.style.transformOrigin = 'center bottom';
+        void next.offsetHeight;
+      }, 1800);
+    }
+
+    var flipCount = 0;
+    var maxFlips = n - 1;
+
+    function scheduleFlip() {
+      if (flipCount >= maxFlips) return;
+      setTimeout(function() {
+        flip();
+        flipCount++;
+        scheduleFlip();
+      }, 4000);
+    }
+
+    setTimeout(function() {
+      flip();
+      flipCount++;
+      scheduleFlip();
+    }, 2000);
+  })();
+  </script>
+</body>
+</html>
