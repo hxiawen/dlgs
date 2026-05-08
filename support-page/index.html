@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dualogues - Chrome Extension Support Page</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #333;
+    background: #fff;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  .header {
+    background: #247F7F;
+    color: #fff;
+    padding: 48px 0 40px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 18px;
+    opacity: 0.9;
+    font-weight: 400;
+  }
+
+  /* Nav */
+  .nav {
+    background: #1a6363;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+  .nav a:hover { color: #fff; }
+  .nav .lang-switch {
+    margin-left: 8px;
+    font-size: 13px;
+    opacity: 0.8;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 4px;
+    padding: 2px 10px;
+  }
+  .nav .lang-switch:hover { opacity: 1; border-color: rgba(255,255,255,0.7); }
+  .nav .nav-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 4px;
+  }
+
+  /* Sections */
+  .section {
+    padding: 48px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #247F7F;
+    margin-bottom: 20px;
+  }
+  .section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  .section p {
+    margin-bottom: 12px;
+    color: #555;
+  }
+  .section ul {
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+  .section li {
+    margin-bottom: 8px;
+    color: #555;
+  }
+
+  /* Feature cards */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .feature-card {
+    background: #f8faf9;
+    border: 1px solid #e4ede8;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .feature-card h3 {
+    color: #247F7F;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .feature-card p {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  /* FAQ */
+  .faq-item {
+    margin-bottom: 24px;
+  }
+  .faq-item .question {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .faq-item .question::before {
+    content: "Q";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    background: #247F7F;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .faq-item .answer {
+    margin-left: 32px;
+    color: #555;
+  }
+  .faq-item .answer code {
+    background: #f0f4f2;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #247F7F;
+  }
+
+  /* Privacy */
+  .privacy-section {
+    padding: 48px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .privacy-section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #247F7F;
+    margin-bottom: 20px;
+  }
+  .privacy-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+  .privacy-section p,
+  .privacy-section ul {
+    color: #555;
+    margin-bottom: 12px;
+  }
+  .privacy-section ul {
+    padding-left: 20px;
+  }
+  .privacy-section li {
+    margin-bottom: 6px;
+  }
+
+  /* Contact */
+  .contact-links {
+    list-style: none;
+    padding: 0;
+  }
+  .contact-links li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .contact-links a {
+    color: #247F7F;
+    text-decoration: none;
+    border-bottom: 1px solid #b3d9d9;
+    transition: border-color 0.2s;
+  }
+  .contact-links a:hover {
+    border-bottom-color: #247F7F;
+  }
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #e8f2f0;
+    border-radius: 6px;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  .footer {
+    background: #f8faf9;
+    padding: 24px 0;
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+  }
+
+  /* Responsive */
+  @media (max-width: 540px) {
+    .header h1 { font-size: 28px; }
+    .header p { font-size: 16px; }
+    .features { grid-template-columns: 1fr; }
+    .section { padding: 36px 0; }
+    .nav .container { gap: 4px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <h1>Dualogues</h1>
+    <p>Navigate long AI conversations with ease</p>
+  </div>
+</header>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="#about">About</a>
+    <a href="#faq">FAQ</a>
+    <a href="#data-privacy">Data &amp; Privacy</a>
+    <a href="#privacy-policy">Privacy Policy</a>
+    <a href="#contact">Contact</a>
+    <span class="nav-divider"></span>
+    <a href="index_zh.html" class="lang-switch">中文</a>
+  </div>
+</nav>
+
+<!-- About -->
+<section id="about" class="section">
+  <div class="container">
+    <h2>About</h2>
+    <p>Dualogues is a Chrome extension designed for heavy AI chat users. When ChatGPT conversations get long, finding a specific message often requires endless scrolling. Dualogues provides visual navigation on the right side of the page, letting you jump to any position with a single click.</p>
+
+    <div class="features">
+      <div class="feature-card">
+        <h3>Widget Track Lines</h3>
+        <p>Compact track line markers on the right side of the page visually reflect the conversation structure and density.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Panel Sidebar</h3>
+        <p>Hover over a track line to expand the panel and browse the full list of questions without leaving the current page.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Precise Navigation</h3>
+        <p>Click any question block and the page smoothly scrolls to the corresponding position, quickly locating the conversation content.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Auto Theme Adaptation</h3>
+        <p>Automatically follows ChatGPT's light/dark theme switching, keeping the visual style consistent at all times.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="container">
+    <h2>FAQ</h2>
+
+    <div class="faq-item">
+      <div class="question">Nothing happens after installation?</div>
+      <div class="answer">
+        Make sure you are currently on a <code>chatgpt.com</code> page and have logged into ChatGPT. Dualogues only runs on the ChatGPT website and will not activate on other sites.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Can't see the Widget track lines?</div>
+      <div class="answer">
+        The page needs at least one message you sent (a user message) for the Widget to display track line markers. If the conversation just opened and hasn't finished loading, please wait a few seconds.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Scroll position is inaccurate?</div>
+      <div class="answer">
+        ChatGPT's page structure may change with version updates, which could cause scroll position offsets. If you encounter this issue, please report it to us through the contact information below, and we will adapt as soon as possible.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">How do I delete extension stored data?</div>
+      <div class="answer">
+        All Dualogues data is stored locally in your browser (IndexedDB) and is never uploaded to any server. You can manage data through:
+        <ul style="margin-top:8px">
+          <li>Type <code>chrome://settings/content/all</code> in the Chrome address bar, find <code>chatgpt.com</code>, and click "Clear data".</li>
+          <li>Or simply uninstall the Dualogues extension, and all extension-related data will be automatically removed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Does Dualogues read my conversation content?</div>
+      <div class="answer">
+        Dualogues needs to read message text on the page to extract question summaries for display in the Panel. All processing is done locally in your browser, and no data is sent to external servers. See the Privacy Policy below for details.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Data & Privacy -->
+<section id="data-privacy" class="section">
+  <div class="container">
+    <h2>Data &amp; Privacy</h2>
+    <p>Dualogues respects your privacy. All data required for the extension to operate is stored locally in your browser (IndexedDB and chrome.storage), and is never uploaded, transmitted, or shared with any third party.</p>
+    <p>Specifically:</p>
+    <ul>
+      <li><strong>Does not collect</strong> personal identity information, account information, or conversation content.</li>
+      <li><strong>Does not send</strong> any data to external servers. No analytics tracking, no remote logging.</li>
+      <li><strong>Does not connect to</strong> any third-party services. The extension runs entirely offline.</li>
+      <li>Data is used solely for maintaining navigation functionality locally (such as remembering conversation structure), and uninstalling the extension clears all data.</li>
+    </ul>
+    <p>For the full privacy policy, see <a href="#privacy-policy" style="color:#247F7F">below</a>.</p>
+  </div>
+</section>
+
+<!-- Privacy Policy -->
+<section id="privacy-policy" class="privacy-section">
+  <div class="container">
+    <h2>Privacy Policy</h2>
+    <p style="color:#999; font-size:13px;">Last updated: 2026-05-02</p>
+
+    <h3>1. Overview</h3>
+    <p>Dualogues ("the Extension") is a Chrome browser extension that helps users navigate long ChatGPT conversations. This privacy policy explains how the Extension handles user data.</p>
+
+    <h3>2. Data Collection</h3>
+    <p>The Extension <strong>does not collect</strong> any personal identity information. Specifically:</p>
+    <ul>
+      <li>It does not collect names, email addresses, phone numbers, or other personal identity information.</li>
+      <li>It does not collect ChatGPT account information or login credentials.</li>
+      <li>It does not use cookies or any tracking technologies.</li>
+      <li>It does not collect browsing history or information about other websites visited.</li>
+    </ul>
+
+    <h3>3. Data Usage</h3>
+    <p>The Extension processes page content locally in the browser to enable the following features:</p>
+    <ul>
+      <li>Detecting user messages in ChatGPT conversations and generating question summaries.</li>
+      <li>Displaying conversation structure markers in the Widget on the right side.</li>
+      <li>Presenting a clickable list of questions in the Panel.</li>
+      <li>Navigating to the corresponding position in the conversation based on user clicks.</li>
+    </ul>
+    <p>All processing is done locally in the user's browser, and the processed data is used solely for local display and navigation functionality.</p>
+
+    <h3>4. Data Storage</h3>
+    <p>The Extension uses the following browser-local storage mechanisms:</p>
+    <ul>
+      <li><strong>IndexedDB</strong>: Stores conversation structure and question summaries for restoring navigation state across page refreshes. Data is isolated by ChatGPT conversation ID.</li>
+      <li><strong>chrome.storage.local</strong>: Stores user preference settings (such as whether the panel is pinned). It does not contain any conversation content.</li>
+    </ul>
+    <p>All data is stored locally on the user's device and is never uploaded to any server. Data retention lasts as long as the extension is installed; uninstalling the extension automatically deletes all data.</p>
+
+    <h3>5. Data Deletion</h3>
+    <p>Users can manage or delete data through the following methods:</p>
+    <ul>
+      <li>Type <code>chrome://settings/content/all</code> in the Chrome address bar, find <code>chatgpt.com</code>, and click "Clear data".</li>
+      <li>Uninstall the Dualogues extension, and all extension-related data will be cleared.</li>
+    </ul>
+
+    <h3>6. Third-Party Services</h3>
+    <p>The Extension <strong>does not connect to</strong> any third-party services, including but not limited to:</p>
+    <ul>
+      <li>It does not use third-party analytics or tracking services (such as Google Analytics).</li>
+      <li>It does not use third-party advertising services.</li>
+      <li>It does not share any data with any third party.</li>
+      <li>It does not call any remote APIs.</li>
+    </ul>
+
+    <h3>7. Permissions</h3>
+    <p>The Chrome permissions requested by the Extension and their purposes:</p>
+    <ul>
+      <li><strong>Access chatgpt.com page content</strong>: Read conversation message structure to generate navigation markers.</li>
+      <li><strong>Local storage</strong>: Save conversation navigation data and user settings locally in the browser.</li>
+    </ul>
+    <p>The Extension does not request any sensitive permissions (such as bookmarks, history, downloads, tab management, etc.).</p>
+
+    <h3>8. Children's Privacy</h3>
+    <p>The Extension is not directed at children under 13 and does not knowingly collect personal information from children.</p>
+
+    <h3>9. Policy Changes</h3>
+    <p>This privacy policy may be revised as extension features are updated. Significant changes will be communicated to users in the extension update notes. Continued use of the extension constitutes acceptance of the revised policy.</p>
+
+    <h3>10. Contact</h3>
+    <p>For privacy-related questions or data requests, please contact us through:</p>
+    <p>Email: <a href="mailto:support@dualogues.com" style="color:#247F7F">support@dualogues.com</a></p>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section">
+  <div class="container">
+    <h2>Contact Us</h2>
+    <p>If you have questions, suggestions, or feedback, feel free to reach out through:</p>
+    <ul class="contact-links">
+      <li>
+        <span class="icon">&#9993;</span>
+        <span>Email: <a href="mailto:support@dualogues.com">support@dualogues.com</a></span>
+      </li>
+      <li>
+        <span class="icon">&#9733;</span>
+        <span>Chrome Web Store: <a href="https://chromewebstore.google.com/detail/dualogues/TODO" target="_blank" rel="noopener noreferrer">Dualogues</a></span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    &copy; 2026 Dualogues. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>

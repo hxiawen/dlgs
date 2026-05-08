@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dualogues - Chrome 扩展支持页</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #333;
+    background: #fff;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  .header {
+    background: #247F7F;
+    color: #fff;
+    padding: 48px 0 40px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 18px;
+    opacity: 0.9;
+    font-weight: 400;
+  }
+
+  /* Nav */
+  .nav {
+    background: #1a6363;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+  .nav a:hover { color: #fff; }
+  .nav .lang-switch {
+    margin-left: 8px;
+    font-size: 13px;
+    opacity: 0.8;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 4px;
+    padding: 2px 10px;
+  }
+  .nav .lang-switch:hover { opacity: 1; border-color: rgba(255,255,255,0.7); }
+  .nav .nav-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 4px;
+  }
+
+  /* Sections */
+  .section {
+    padding: 48px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #247F7F;
+    margin-bottom: 20px;
+  }
+  .section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  .section p {
+    margin-bottom: 12px;
+    color: #555;
+  }
+  .section ul {
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+  .section li {
+    margin-bottom: 8px;
+    color: #555;
+  }
+
+  /* Feature cards */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .feature-card {
+    background: #f8faf9;
+    border: 1px solid #e4ede8;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .feature-card h3 {
+    color: #247F7F;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .feature-card p {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  /* FAQ */
+  .faq-item {
+    margin-bottom: 24px;
+  }
+  .faq-item .question {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .faq-item .question::before {
+    content: "Q";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    background: #247F7F;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .faq-item .answer {
+    margin-left: 32px;
+    color: #555;
+  }
+  .faq-item .answer code {
+    background: #f0f4f2;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #247F7F;
+  }
+
+  /* Privacy */
+  .privacy-section {
+    padding: 48px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .privacy-section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #247F7F;
+    margin-bottom: 20px;
+  }
+  .privacy-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+  .privacy-section p,
+  .privacy-section ul {
+    color: #555;
+    margin-bottom: 12px;
+  }
+  .privacy-section ul {
+    padding-left: 20px;
+  }
+  .privacy-section li {
+    margin-bottom: 6px;
+  }
+
+  /* Contact */
+  .contact-links {
+    list-style: none;
+    padding: 0;
+  }
+  .contact-links li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .contact-links a {
+    color: #247F7F;
+    text-decoration: none;
+    border-bottom: 1px solid #b3d9d9;
+    transition: border-color 0.2s;
+  }
+  .contact-links a:hover {
+    border-bottom-color: #247F7F;
+  }
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #e8f2f0;
+    border-radius: 6px;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  .footer {
+    background: #f8faf9;
+    padding: 24px 0;
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+  }
+
+  /* Responsive */
+  @media (max-width: 540px) {
+    .header h1 { font-size: 28px; }
+    .header p { font-size: 16px; }
+    .features { grid-template-columns: 1fr; }
+    .section { padding: 36px 0; }
+    .nav .container { gap: 4px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <h1>Dualogues</h1>
+    <p>Navigate long AI conversations with ease</p>
+  </div>
+</header>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="#about">产品介绍</a>
+    <a href="#faq">常见问题</a>
+    <a href="#data-privacy">数据与隐私</a>
+    <a href="#privacy-policy">隐私政策</a>
+    <a href="#contact">联系我们</a>
+    <span class="nav-divider"></span>
+    <a href="index.html" class="lang-switch">English</a>
+  </div>
+</nav>
+
+<!-- About -->
+<section id="about" class="section">
+  <div class="container">
+    <h2>产品介绍</h2>
+    <p>Dualogues 是一款 Chrome 扩展，专为频繁使用 AI 对话的用户设计。当 ChatGPT 对话变得很长时，找到某条特定消息往往需要反复滚动。Dualogues 在页面右侧提供可视化导航，让你一键跳转到任意位置。</p>
+
+    <div class="features">
+      <div class="feature-card">
+        <h3>Widget 轨道线</h3>
+        <p>页面右侧显示紧凑的轨道线标记，直观反映对话结构和密度。</p>
+      </div>
+      <div class="feature-card">
+        <h3>Panel 侧边面板</h3>
+        <p>悬停轨道线即可展开面板，浏览完整的问题列表，无需离开当前页面。</p>
+      </div>
+      <div class="feature-card">
+        <h3>精准导航跳转</h3>
+        <p>点击任意问题块，页面自动平滑滚动到对应位置，快速定位对话内容。</p>
+      </div>
+      <div class="feature-card">
+        <h3>主题自动适配</h3>
+        <p>自动跟随 ChatGPT 的浅色/深色主题切换，视觉风格始终一致。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="container">
+    <h2>常见问题</h2>
+
+    <div class="faq-item">
+      <div class="question">安装后没反应？</div>
+      <div class="answer">
+        请确认你当前处于 <code>chatgpt.com</code> 页面，并且已经登录 ChatGPT。Dualogues 仅在 ChatGPT 网页上运行，不会在其他网站激活。
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">看不到 Widget 轨道线？</div>
+      <div class="answer">
+        页面上需要至少存在一条你发送的消息（用户消息），Widget 才会显示轨道线标记。如果对话刚打开尚未加载完成，请稍等几秒。
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">跳转位置不准？</div>
+      <div class="answer">
+        ChatGPT 的页面结构可能随版本更新而变化，这可能导致跳转位置出现偏差。如果遇到此问题，请通过下方联系方式反馈给我们，我们会尽快适配。
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">如何删除扩展存储的数据？</div>
+      <div class="answer">
+        Dualogues 的所有数据存储在浏览器本地（IndexedDB），不上传到任何服务器。你可以通过以下方式管理数据：
+        <ul style="margin-top:8px">
+          <li>在 Chrome 地址栏输入 <code>chrome://settings/content/all</code>，找到 <code>chatgpt.com</code>，点击"清除数据"。</li>
+          <li>或直接卸载 Dualogues 扩展，扩展相关数据将自动清除。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Dualogues 会读取我的对话内容吗？</div>
+      <div class="answer">
+        Dualogues 需要读取页面上的消息文本以提取问题摘要，用于在 Panel 中显示。所有处理都在你的浏览器本地完成，不会将任何数据发送到外部服务器。详见下方隐私政策。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Data & Privacy -->
+<section id="data-privacy" class="section">
+  <div class="container">
+    <h2>数据与隐私</h2>
+    <p>Dualogues 尊重你的隐私。扩展运行所需的所有数据均存储在浏览器本地（IndexedDB 和 chrome.storage），不会上传、传输或分享给任何第三方。</p>
+    <p>具体来说：</p>
+    <ul>
+      <li><strong>不收集</strong>个人身份信息、账户信息或对话内容。</li>
+      <li><strong>不发送</strong>任何数据到外部服务器。无分析追踪、无远程日志。</li>
+      <li><strong>不连接</strong>任何第三方服务。扩展完全离线运行。</li>
+      <li>数据仅用于在本地维持导航功能（如记住对话结构），卸载扩展即全部清除。</li>
+    </ul>
+    <p>完整的隐私政策请见<a href="#privacy-policy" style="color:#247F7F">下方</a>。</p>
+  </div>
+</section>
+
+<!-- Privacy Policy -->
+<section id="privacy-policy" class="privacy-section">
+  <div class="container">
+    <h2>隐私政策 / Privacy Policy</h2>
+    <p style="color:#999; font-size:13px;">最后更新 / Last updated: 2026-05-02</p>
+
+    <h3>1. 概述 / Overview</h3>
+    <p>Dualogues（"本扩展"）是一款 Chrome 浏览器扩展，帮助用户在 ChatGPT 长对话中导航。本隐私政策说明本扩展如何处理用户数据。</p>
+
+    <h3>2. 数据收集 / Data Collection</h3>
+    <p>本扩展<strong>不收集</strong>任何个人身份信息。具体而言：</p>
+    <ul>
+      <li>不收集姓名、邮箱、电话等个人身份信息。</li>
+      <li>不收集 ChatGPT 账户信息或登录凭据。</li>
+      <li>不使用 Cookie 或任何追踪技术。</li>
+      <li>不收集浏览历史或访问的其他网站信息。</li>
+    </ul>
+
+    <h3>3. 数据使用 / Data Usage</h3>
+    <p>本扩展在浏览器本地处理页面内容，以实现以下功能：</p>
+    <ul>
+      <li>检测 ChatGPT 对话中的用户消息，生成问题摘要。</li>
+      <li>在右侧 Widget 中显示对话结构标记。</li>
+      <li>在 Panel 面板中展示可点击的问题列表。</li>
+      <li>根据用户点击导航到对话中的对应位置。</li>
+    </ul>
+    <p>所有处理均在用户浏览器本地完成，处理后的数据仅用于本地展示和导航功能。</p>
+
+    <h3>4. 数据存储 / Data Storage</h3>
+    <p>本扩展使用以下浏览器本地存储机制：</p>
+    <ul>
+      <li><strong>IndexedDB</strong>：存储对话结构和问题摘要，用于跨页面刷新后恢复导航状态。数据按 ChatGPT 对话 ID 隔离存储。</li>
+      <li><strong>chrome.storage.local</strong>：存储用户偏好设置（如面板是否固定）。不包含任何对话内容。</li>
+    </ul>
+    <p>所有数据存储在用户设备本地，不上传至任何服务器。数据保留期限与扩展安装期限一致，卸载扩展后数据自动删除。</p>
+
+    <h3>5. 数据删除 / Data Deletion</h3>
+    <p>用户可以通过以下方式管理或删除数据：</p>
+    <ul>
+      <li>在 Chrome 地址栏输入 <code>chrome://settings/content/all</code>，找到 <code>chatgpt.com</code>，点击"清除数据"。</li>
+      <li>卸载 Dualogues 扩展，所有扩展相关数据将被清除。</li>
+    </ul>
+
+    <h3>6. 第三方服务 / Third-Party Services</h3>
+    <p>本扩展<strong>不连接</strong>任何第三方服务，包括但不限于：</p>
+    <ul>
+      <li>不使用第三方分析或追踪服务（如 Google Analytics）。</li>
+      <li>不使用第三方广告服务。</li>
+      <li>不与任何第三方共享数据。</li>
+      <li>不调用任何远程 API。</li>
+    </ul>
+
+    <h3>7. 权限说明 / Permissions</h3>
+    <p>本扩展请求的 Chrome 权限及其用途：</p>
+    <ul>
+      <li><strong>访问 chatgpt.com 页面内容</strong>：读取对话消息结构以生成导航标记。</li>
+      <li><strong>本地存储</strong>：在浏览器本地保存对话导航数据和用户设置。</li>
+    </ul>
+    <p>本扩展不请求任何敏感权限（如书签、历史记录、下载、标签页管理等）。</p>
+
+    <h3>8. 儿童隐私 / Children's Privacy</h3>
+    <p>本扩展不面向 13 岁以下儿童，不有意收集儿童的个人信息。</p>
+
+    <h3>9. 政策变更 / Policy Changes</h3>
+    <p>本隐私政策可能随扩展功能更新而修订。重大变更将在扩展更新说明中告知用户。继续使用扩展即视为同意修订后的政策。</p>
+
+    <h3>10. 联系方式 / Contact</h3>
+    <p>如有隐私相关问题或数据请求，请通过以下方式联系：</p>
+    <p>邮箱：<a href="mailto:support@dualogues.com" style="color:#247F7F">support@dualogues.com</a></p>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section">
+  <div class="container">
+    <h2>联系我们</h2>
+    <p>如有问题、建议或反馈，欢迎通过以下方式联系：</p>
+    <ul class="contact-links">
+      <li>
+        <span class="icon">&#9993;</span>
+        <span>邮箱：<a href="mailto:support@dualogues.com">support@dualogues.com</a></span>
+      </li>
+      <li>
+        <span class="icon">&#9733;</span>
+        <span>Chrome Web Store：<a href="https://chromewebstore.google.com/detail/dualogues/TODO" target="_blank" rel="noopener noreferrer">Dualogues</a></span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    &copy; 2026 Dualogues. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
