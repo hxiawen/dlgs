@@ -5,17 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dualogues — Navigate out of AI chat chaos</title>
   <meta name="description" content="Dualogues is a Chrome extension that adds visual navigation to long ChatGPT conversations. Jump to any message with one click.">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/icon/48.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="assets/icon/128.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="assets/icon/128.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=BioRhyme:wght@400;600;700;800&family=Calligraffitti&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@400;600;700;800&family=Calligraffitti&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <nav class="nav">
     <div class="container">
       <a href="/" class="nav-brand">
-        <img src="assets/dualogues-logo.png" alt="" class="nav-icon">
-        <span class="nav-wordmark">Dualogues</span>
+        <img src="assets/logo/logo-text-332x62.png" alt="Dualogues" class="nav-logo-lockup" width="332" height="62">
       </a>
       <a href="https://chromewebstore.google.com/detail/dualogues/TODO" class="nav-cta" target="_blank" rel="noopener noreferrer">
         Add to Chrome
@@ -41,7 +45,7 @@
           <img src="assets/deepseek-logo.png" alt="" class="hero-icon-img" style="width:72px;height:74px">
         </div>
         <div class="hero-card" style="z-index:1">
-          <img src="assets/dualogues-logo.png" alt="" class="hero-icon-img" style="width:65px;height:67px">
+          <img src="assets/icon/128.png" alt="" class="hero-icon-img" style="width:60px;height:60px">
         </div>
       </div>
 
@@ -237,21 +241,15 @@
       }, 1800);
     }
 
-    var flipCount = 0;
-    var maxFlips = n - 1;
-
     function scheduleFlip() {
-      if (flipCount >= maxFlips) return;
       setTimeout(function() {
         flip();
-        flipCount++;
         scheduleFlip();
       }, 4000);
     }
 
     setTimeout(function() {
       flip();
-      flipCount++;
       scheduleFlip();
     }, 2000);
   })();
