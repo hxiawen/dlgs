@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Dualogues</title>
   <meta name="description" content="Dualogues Chrome Extension Privacy Policy. Learn how Dualogues handles your data.">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/32.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="assets/icon/48.png">
-  <link rel="icon" type="image/png" sizes="128x128" href="assets/icon/128.png">
-  <link rel="apple-touch-icon" sizes="128x128" href="assets/icon/128.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icon/16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icon/32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets/icon/48.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="../assets/icon/128.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="../assets/icon/128.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@400;600;700;800&family=Calligraffitti&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles.css">
   <style>
     .legal-page { padding: 80px 0; }
     .legal-page .container { max-width: 720px; }
@@ -34,8 +34,8 @@
 
   <nav class="nav">
     <div class="container">
-      <a href="index.html" class="nav-brand">
-        <img src="assets/logo/logo-text-332x62.png" alt="Dualogues" class="nav-logo-lockup" width="332" height="62">
+      <a href="../index.html" class="nav-brand">
+        <img src="../assets/logo/logo-text-332x62.png" alt="Dualogues" class="nav-logo-lockup" width="332" height="62">
       </a>
       <a href="https://chromewebstore.google.com/detail/dualogues/TODO" class="nav-cta" target="_blank" rel="noopener noreferrer">
         Feedback
@@ -50,10 +50,10 @@
       <hr class="legal-divider">
 
       <h2>1. Overview</h2>
-      <p>Dualogues ("the Extension") is a Chrome browser extension that helps users navigate long ChatGPT conversations. This privacy policy explains how the Extension handles user data.</p>
+      <p>Dualogues ("the Extension") is an independent project and is not affiliated with, endorsed by, or associated with OpenAI or ChatGPT. It is a Chrome browser extension that helps users navigate long ChatGPT conversations. This privacy policy explains how the Extension handles user data.</p>
 
       <h2>2. Data Collection</h2>
-      <p>The Extension <strong>does not collect</strong> any personal identity information. Specifically:</p>
+      <p>The Extension <strong>does not collect, transmit, or share</strong> any user data externally. All data processing happens entirely within the user's browser. It reads your sent messages locally to generate navigation summaries (see Section 3), but never sends this data anywhere. Specifically:</p>
       <ul>
         <li>It does not collect names, email addresses, phone numbers, or other personal identity information.</li>
         <li>It does not collect ChatGPT account information or login credentials.</li>
@@ -62,14 +62,13 @@
       </ul>
 
       <h2>3. Data Usage</h2>
-      <p>The Extension processes page content locally in the browser to enable the following features:</p>
+      <p>The Extension accesses the following data from ChatGPT pages, strictly within the user's browser:</p>
       <ul>
-        <li>Detecting user messages in ChatGPT conversations and generating question summaries.</li>
-        <li>Displaying conversation structure markers in the Widget on the right side of the page.</li>
-        <li>Presenting a clickable list of questions in the Panel sidebar.</li>
-        <li>Navigating to the corresponding position in the conversation based on user clicks.</li>
+        <li><strong>Conversation message text sent by the user</strong> — to generate short question summaries for the navigation panel.</li>
+        <li><strong>DOM structure of the ChatGPT page</strong> — to position navigation markers and track conversation layout.</li>
+        <li><strong>The page's color theme (light/dark)</strong> — to match the extension's appearance to the page.</li>
       </ul>
-      <p>All processing is done locally in the user's browser. The processed data is used solely for local display and navigation functionality.</p>
+      <p>No assistant responses, file attachments, account information, or settings are accessed. All processing is done locally. The processed data is used solely for local display and navigation functionality.</p>
 
       <h2>4. Data Storage</h2>
       <p>The Extension uses the following browser-local storage mechanisms:</p>
@@ -79,14 +78,17 @@
       </ul>
       <p>All data is stored locally on the user's device and is never uploaded to any server. Data retention lasts as long as the extension is installed; uninstalling the extension automatically deletes all data.</p>
 
-      <h2>5. Data Deletion</h2>
+      <h2>5. Data Security</h2>
+      <p>All data is stored within Chrome's built-in sandbox (IndexedDB and chrome.storage.local), which is isolated from other extensions and websites. The Extension does not use custom encryption because no data ever leaves this sandbox.</p>
+
+      <h2>6. Data Deletion</h2>
       <p>Users can manage or delete data through the following methods:</p>
       <ul>
         <li>Type <code>chrome://settings/content/all</code> in the Chrome address bar, find <code>chatgpt.com</code>, and click "Clear data".</li>
         <li>Uninstall the Dualogues extension, which automatically clears all extension-related data.</li>
       </ul>
 
-      <h2>6. Third-Party Services</h2>
+      <h2>7. Third-Party Services</h2>
       <p>The Extension <strong>does not connect to</strong> any third-party services, including but not limited to:</p>
       <ul>
         <li>It does not use third-party analytics or tracking services (such as Google Analytics).</li>
@@ -95,21 +97,22 @@
         <li>It does not call any remote APIs.</li>
       </ul>
 
-      <h2>7. Permissions</h2>
+      <h2>8. Permissions</h2>
       <p>The Chrome permissions requested by the Extension and their purposes:</p>
       <ul>
         <li><strong>Access chatgpt.com page content</strong>: Read conversation message structure to generate navigation markers.</li>
         <li><strong>Local storage</strong>: Save conversation navigation data and user settings locally in the browser.</li>
+        <li><strong>Page script injection</strong>: Injects a lightweight script (chatgpt-network-bridge.js) into the ChatGPT page to observe conversation data already loaded in the page. This script does not modify page behavior or communicate externally.</li>
       </ul>
       <p>The Extension does not request any sensitive permissions (such as bookmarks, history, downloads, or tab management).</p>
 
-      <h2>8. Children's Privacy</h2>
-      <p>The Extension is not directed at children under 13 and does not knowingly collect personal information from children.</p>
+      <h2>9. Children's Privacy</h2>
+      <p>The Extension is not directed at children and does not knowingly collect personal information from anyone under the age of digital consent in their jurisdiction.</p>
 
-      <h2>9. Policy Changes</h2>
+      <h2>10. Policy Changes</h2>
       <p>This privacy policy may be revised as extension features are updated. Significant changes will be communicated to users in the extension update notes. Continued use of the extension constitutes acceptance of the revised policy.</p>
 
-      <h2>10. Contact</h2>
+      <h2>11. Contact</h2>
       <p>For privacy-related questions or data requests, please contact:</p>
       <p>Email: <a href="mailto:hxiawen@dualogues.com">hxiawen@dualogues.com</a></p>
     </div>
@@ -117,7 +120,7 @@
 
   <footer class="page-footer" style="max-width:720px;margin:0 auto;border-top:1px solid #E8E6DC;padding:20px 32px;text-align:center;">
     <div class="page-footer-links" style="display:flex;justify-content:center;flex-wrap:wrap;gap:6px 20px;margin-bottom:8px;font-size:14px;">
-      <a href="index.html">Home</a>
+      <a href="../index.html">Home</a>
       <a href="privacy.html" class="current">Privacy Policy</a>
       <a href="terms.html">Terms of Service</a>
       <a href="mailto:hxiawen@dualogues.com">hxiawen@dualogues.com</a>
