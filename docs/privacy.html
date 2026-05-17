@@ -68,7 +68,7 @@
         <li><strong>DOM structure of the ChatGPT page</strong> — to position navigation markers and track conversation layout.</li>
         <li><strong>The page's color theme (light/dark)</strong> — to match the extension's appearance to the page.</li>
       </ul>
-      <p>No assistant responses, file attachments, account information, or settings are accessed. All processing is done locally. The processed data is used solely for local display and navigation functionality.</p>
+      <p>The extension locally parses ChatGPT conversation response data already loaded by ChatGPT. It extracts and stores only user-sent message text (truncated to navigation-relevant length) needed for conversation navigation; assistant message text is not stored or displayed; no data is transmitted externally.</p>
 
       <h2>4. Data Storage</h2>
       <p>The Extension uses the following browser-local storage mechanisms:</p>
