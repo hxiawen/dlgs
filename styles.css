@@ -635,6 +635,17 @@ a { color: inherit; text-decoration: none; }
   color: var(--brand-emerald);
 }
 
+.changelog-review-link {
+  color: var(--brand-emerald);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.changelog-review-link:hover {
+  opacity: 0.8;
+}
+
 .changelog-emphasis {
   color: var(--text-primary);
   font-weight: 600;
