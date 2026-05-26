@@ -585,7 +585,8 @@ a { color: inherit; text-decoration: none; }
   color: var(--brand-emerald);
 }
 
-.changelog-status--published .changelog-status-dot {
+.changelog-status--published .changelog-status-dot,
+.changelog-status-dot--published {
   background: var(--brand-emerald);
 }
 
