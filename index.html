@@ -92,37 +92,32 @@
 
   <section id="changelog" class="section">
     <div class="container">
-      <h2>Changelog</h2>
-      <ol class="changelog-timeline">
-        <li class="changelog-entry">
-          <time class="changelog-date" datetime="2026-05-26">2026-05-26</time>
+      <div class="changelog-section-header">
+        <h2>Changelog</h2>
+        <a href="docs/changelogs.html" class="changelog-more-link">More</a>
+      </div>
+      <ol class="changelog-timeline" data-changelog-source="docs/changelogs.html" data-changelog-limit="3">
+        <li class="changelog-entry changelog-entry--letter">
+          <time class="changelog-date" datetime="2026-05-31">2026-05-31</time>
           <div class="changelog-node" aria-hidden="true"></div>
           <div class="changelog-header-main">
             <p class="changelog-version">v0.1.18</p>
-            <span class="changelog-status changelog-status--developing"><span class="changelog-status-dot changelog-status-dot--developing" aria-hidden="true"></span> Building</span>
+            <span class="changelog-status changelog-status--review"><span class="changelog-status-dot changelog-status-dot--review" aria-hidden="true"></span> In review</span>
           </div>
           <div class="changelog-node-line" aria-hidden="true"></div>
           <div class="changelog-body">
             <div class="changelog-content">
               <h2 class="changelog-title">AI Answer Outlines</h2>
-              <div class="changelog-section">
-                <h3 class="changelog-section-title">Added</h3>
-                <ul>
-                  <li>Turn long <span class="changelog-highlight">AI answers</span> into a scannable outline.</li>
-                  <li>Jump to any section by clicking an outline item.</li>
-                </ul>
-              </div>
-              <div class="changelog-section">
-                <h3 class="changelog-section-title">Improved</h3>
-                <ul>
-                  <li>Made question blocks more compact, so you can read more at a glance.</li>
-                </ul>
-              </div>
-              <div class="changelog-section">
-                <h3 class="changelog-section-title">Fixed</h3>
-                <ul>
-                  <li>Fixed jump positioning when clicking question blocks.</li>
-                </ul>
+              <div class="changelog-letter">
+                <p>Hi,</p>
+                <p>Two nights ago, while testing Dualogues, I noticed another trackline sitting on top of mine. The panel looked different too. At first, I thought, maybe a bug.</p>
+                <p>Then I realized, <span class="changelog-highlight">maybe an experiment</span> — a feature very similar to Dualogues, from ChatGPT itself.</p>
+                <p>If you're lucky enough, like I was, you may be included in this experiment. But as a developer, I felt a little differently. A little sad, and also a little validated.</p>
+                <p>So I'll keep building something I really want to use every day.</p>
+                <p>And this time, that means <span class="changelog-highlight">AI Answer Outlines</span>. Keep it simple, just like the first version.</p>
+                <p>Dualogues turns long AI replies into outlines. Click any outline item, and you'll <span class="changelog-highlight">jump directly to the right place</span>.</p>
+                <p>Sorry, for now it only works in Light Mode. I'll keep working on it.</p>
+                <p class="changelog-letter-signoff">Yours Hxia</p>
               </div>
             </div>
           </div>
@@ -295,6 +290,41 @@
       flip();
       scheduleFlip();
     }, 2000);
+  })();
+
+  (function() {
+    var timeline = document.querySelector('#changelog .changelog-timeline[data-changelog-source]');
+    if (!timeline || !window.fetch || !window.DOMParser) {
+      return;
+    }
+
+    var source = timeline.getAttribute('data-changelog-source');
+    var limit = parseInt(timeline.getAttribute('data-changelog-limit') || '3', 10);
+    if (!source || !limit) {
+      return;
+    }
+
+    fetch(source, { cache: 'no-store' })
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error('Unable to load changelog');
+        }
+        return response.text();
+      })
+      .then(function(html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var entries = Array.prototype.slice.call(doc.querySelectorAll('.changelog-timeline .changelog-entry'), 0, limit);
+        if (!entries.length) {
+          return;
+        }
+        timeline.innerHTML = '';
+        entries.forEach(function(entry) {
+          timeline.appendChild(document.importNode(entry, true));
+        });
+      })
+      .catch(function() {
+        // Keep the static fallback entries if the full changelog cannot be fetched.
+      });
   })();
   </script>
 </body>

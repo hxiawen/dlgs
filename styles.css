@@ -313,8 +313,29 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.02em;
 }
 
-#changelog > .container > h2 {
+.changelog-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
   margin-bottom: 42px;
+}
+
+.changelog-section-header > h1,
+.changelog-section-header > h2 {
+  margin-bottom: 0;
+}
+
+.changelog-more-link {
+  flex-shrink: 0;
+  color: var(--brand-emerald);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.changelog-more-link:hover {
+  opacity: 0.8;
 }
 
 /* Feature cards */
@@ -488,13 +509,18 @@ a { color: inherit; text-decoration: none; }
 
 .changelog-entry {
   position: relative;
+  --changelog-entry-gap: 60px;
   --changelog-row-gap: 20px;
   display: grid;
   grid-template-columns: 88px 10px 1fr;
   column-gap: 16px;
   row-gap: var(--changelog-row-gap);
   align-items: start;
-  padding-bottom: 44px;
+  padding-bottom: 0;
+}
+
+.changelog-entry:not(:last-child) {
+  padding-bottom: var(--changelog-entry-gap);
 }
 
 .changelog-date {
@@ -619,7 +645,7 @@ a { color: inherit; text-decoration: none; }
   background: #D35400;
 }
 
-.changelog-title {
+.changelog-entry .changelog-title {
   font-size: 18px;
   font-weight: 600;
   margin: 0;
@@ -660,10 +686,6 @@ a { color: inherit; text-decoration: none; }
 .changelog-emphasis {
   color: var(--text-primary);
   font-weight: 600;
-}
-
-.changelog-entry--letter {
-  padding-bottom: 0;
 }
 
 .changelog-entry--letter .changelog-letter-signoff {
